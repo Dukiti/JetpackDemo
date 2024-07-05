@@ -34,7 +34,7 @@ import com.dungnm.example.compose.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(
+fun ToolBar(
     onUpClick: (() -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {

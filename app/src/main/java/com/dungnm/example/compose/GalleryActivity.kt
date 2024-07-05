@@ -14,7 +14,7 @@ class GalleryActivity : BaseActivity() {
 
     override var titleRes: Int = R.string.label_gallery
 
-    private val viewModel by viewModels<GalleryViewModel>()
+    override val viewModel by viewModels<GalleryViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

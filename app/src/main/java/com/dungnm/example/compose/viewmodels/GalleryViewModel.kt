@@ -2,14 +2,13 @@ package com.dungnm.example.compose.viewmodels
 
 import android.content.Context
 import androidx.annotation.MainThread
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dungnm.example.compose.model.ImageGallery
 import com.dungnm.example.compose.model.PlaceholderState
 import com.dungnm.example.compose.repo.GalleryRepo
+import com.dungnm.example.compose.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,10 +16,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GalleryViewModel @Inject constructor() : ViewModel() {
+class GalleryViewModel @Inject constructor() : BaseViewModel() {
 
 
-    private val _usersSF = MutableStateFlow(emptyList<ImageGallery>())
+    private val _listPhotoSF = MutableStateFlow(emptyList<ImageGallery>())
     private val _loadingStateSF = MutableStateFlow<PlaceholderState>(PlaceholderState.Idle(true))
     private val _firstPageStateSF = MutableStateFlow<PlaceholderState>(PlaceholderState.Idle(true))
     private val _isRefreshingSF = MutableStateFlow(false)
@@ -44,7 +43,7 @@ class GalleryViewModel @Inject constructor() : ViewModel() {
             _loadingStateSF.value is PlaceholderState.Failure
         }
 
-    val usersStateFlow: StateFlow<List<ImageGallery>> = _usersSF.asStateFlow()
+    val galleryStateFlow: StateFlow<List<ImageGallery>> = _listPhotoSF.asStateFlow()
 
     val firstPageStateFlow: StateFlow<PlaceholderState> = _firstPageStateSF.asStateFlow()
 
@@ -90,7 +89,7 @@ class GalleryViewModel @Inject constructor() : ViewModel() {
                 updateState(PlaceholderState.Loading)
             }
 
-            val currentList = if (refresh) emptyList() else _usersSF.value
+            val currentList = if (refresh) emptyList() else _listPhotoSF.value
 
             runCatching {
                 val listResult =
@@ -103,7 +102,7 @@ class GalleryViewModel @Inject constructor() : ViewModel() {
                     } else {
                         updateState(PlaceholderState.Idle(it.isEmpty()))
                     }
-                    _usersSF.value = currentList + it
+                    _listPhotoSF.value = currentList + it
                     pageIndex++
                     loadedAllPage = it.size < pageLimit
                 },

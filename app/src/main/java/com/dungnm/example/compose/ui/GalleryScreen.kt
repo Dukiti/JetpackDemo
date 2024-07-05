@@ -1,6 +1,5 @@
 package com.dungnm.example.compose.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.material3.Button
@@ -34,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.dungnm.example.compose.model.ImageGallery
 import com.dungnm.example.compose.model.PlaceholderState
-import com.dungnm.example.compose.ui.common.TopBar
+import com.dungnm.example.compose.ui.common.ToolBar
 import com.dungnm.example.compose.viewmodels.GalleryViewModel
 
 
@@ -42,7 +39,7 @@ import com.dungnm.example.compose.viewmodels.GalleryViewModel
 fun GalleryScreen(vm: GalleryViewModel) {
     val context = LocalContext.current
     Scaffold(topBar = {
-        TopBar()
+        ToolBar()
     }) { innerPadding ->
         val firstPageState = vm.firstPageStateFlow.collectAsState().value
         when (firstPageState) {
@@ -76,7 +73,7 @@ fun GalleryScreen(vm: GalleryViewModel) {
                         )
                     }
                 } else {
-                    val userList by vm.usersStateFlow.collectAsState()
+                    val userList by vm.galleryStateFlow.collectAsState()
                     val loadingState by vm.loadingStateFlow.collectAsState()
 
                     PhotoList(

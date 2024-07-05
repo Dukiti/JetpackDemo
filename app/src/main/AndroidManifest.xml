@@ -38,6 +38,10 @@
         <activity
             android:name=".GalleryActivity"
             android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="fullSensor" />
     </application>
 
 </manifest>
