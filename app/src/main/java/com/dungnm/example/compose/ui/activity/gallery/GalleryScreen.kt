@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.ui
+package com.dungnm.example.compose.ui.activity.gallery
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,7 +32,6 @@ import coil.compose.AsyncImage
 import com.dungnm.example.compose.model.ImageGallery
 import com.dungnm.example.compose.model.PlaceholderState
 import com.dungnm.example.compose.ui.common.ToolBar
-import com.dungnm.example.compose.viewmodels.GalleryViewModel
 
 
 @Composable

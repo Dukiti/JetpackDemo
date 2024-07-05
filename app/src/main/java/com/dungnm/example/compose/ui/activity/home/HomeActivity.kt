@@ -1,15 +1,14 @@
-package com.dungnm.example.compose
+package com.dungnm.example.compose.ui.activity.home
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import com.dungnm.example.compose.ui.HomeScreen
 import com.dungnm.example.compose.ui.base.BaseActivity
-import com.dungnm.example.compose.ui.theme.JetPackDemoTheme
-import com.dungnm.example.compose.viewmodels.CommonViewModel
+import com.dungnm.example.compose.ui.theme.MainAppTheme
+import com.dungnm.example.compose.ui.activity.CommonViewModel
 
-class MainActivity : BaseActivity() {
+class HomeActivity : BaseActivity() {
 
     override val viewModel: CommonViewModel by viewModels()
 
@@ -17,7 +16,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            JetPackDemoTheme {
+            MainAppTheme {
                 HomeScreen().Screen(viewModel)
             }
         }

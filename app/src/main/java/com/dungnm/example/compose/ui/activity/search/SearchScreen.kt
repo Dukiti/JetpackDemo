@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.ui
+package com.dungnm.example.compose.ui.activity.search
 
 import android.Manifest
 import android.content.Context
@@ -25,21 +25,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dungnm.example.compose.GalleryActivity
-import com.dungnm.example.compose.LoginActivity
+import com.dungnm.example.compose.ui.activity.gallery.GalleryActivity
+import com.dungnm.example.compose.ui.activity.login.LoginActivity
 import com.dungnm.example.compose.ui.base.BaseScreen
-import com.dungnm.example.compose.ui.theme.JetPackDemoTheme
-import com.dungnm.example.compose.viewmodels.CommonViewModel
+import com.dungnm.example.compose.ui.theme.MainAppTheme
 
-class HomeScreen : BaseScreen<CommonViewModel>() {
+class SearchScreen : BaseScreen<SearchViewModel>() {
 
     @Composable
-    override fun Screen(viewModel: CommonViewModel) {
+    override fun Screen(viewModel: SearchViewModel) {
         super.Screen(viewModel)
     }
 
     @Composable
-    override fun ContentView(viewModel: CommonViewModel, innerPadding: PaddingValues) {
+    override fun ContentView(viewModel: SearchViewModel, innerPadding: PaddingValues) {
         val context = LocalContext.current
         val columnModifier = Modifier
             .padding(innerPadding)
@@ -69,6 +68,9 @@ class HomeScreen : BaseScreen<CommonViewModel>() {
             }
             Button(modifier = modifier, onClick = { openLoginForm(context) }) {
                 Text(text = "Login")
+            }
+            Button(modifier = modifier, onClick = { openLoginForm(context) }) {
+                Text(text = "Github Search")
             }
         }
     }
@@ -100,7 +102,7 @@ class HomeScreen : BaseScreen<CommonViewModel>() {
     @Preview(showBackground = true, device = Devices.PIXEL_2)
     @Composable
     fun Preview() {
-        JetPackDemoTheme {
+        MainAppTheme {
             Screen(hiltViewModel())
         }
     }

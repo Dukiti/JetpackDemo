@@ -1,11 +1,10 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.dungnm.example.compose.ui
+package com.dungnm.example.compose.ui.activity.login
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -56,10 +55,9 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dungnm.example.compose.MainActivity
+import com.dungnm.example.compose.ui.activity.home.HomeActivity
 import com.dungnm.example.compose.ui.base.BaseScreen
-import com.dungnm.example.compose.ui.theme.JetPackDemoTheme
-import com.dungnm.example.compose.viewmodels.LoginViewModel
+import com.dungnm.example.compose.ui.theme.MainAppTheme
 
 class LoginScreen : BaseScreen<LoginViewModel>() {
 
@@ -148,7 +146,7 @@ class LoginScreen : BaseScreen<LoginViewModel>() {
 
     fun checkCredentials(creds: Credentials, context: Context): Boolean {
         if (creds.isNotEmpty() && creds.login == "admin") {
-            context.startActivity(Intent(context, MainActivity::class.java))
+            context.startActivity(Intent(context, HomeActivity::class.java))
             (context as Activity).finish()
             return true
         } else {
@@ -275,7 +273,7 @@ class LoginScreen : BaseScreen<LoginViewModel>() {
     @Preview(showBackground = true, device = Devices.PIXEL_2, showSystemUi = true)
     @Composable
     fun LoginFormPreview() {
-        JetPackDemoTheme {
+        MainAppTheme {
             val loginViewModel: LoginViewModel = hiltViewModel()
             Screen(loginViewModel)
         }

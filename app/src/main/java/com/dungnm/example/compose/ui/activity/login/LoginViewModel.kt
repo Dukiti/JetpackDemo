@@ -1,6 +1,5 @@
-package com.dungnm.example.compose.viewmodels
+package com.dungnm.example.compose.ui.activity.login
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.dungnm.example.compose.ui.base.BaseViewModel

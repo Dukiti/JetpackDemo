@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.viewmodels
+package com.dungnm.example.compose.ui.activity
 
 import com.dungnm.example.compose.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

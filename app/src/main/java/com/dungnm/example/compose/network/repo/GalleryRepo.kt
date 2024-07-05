@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.repo
+package com.dungnm.example.compose.network.repo
 
 import android.content.ContentResolver
 import android.content.Context
