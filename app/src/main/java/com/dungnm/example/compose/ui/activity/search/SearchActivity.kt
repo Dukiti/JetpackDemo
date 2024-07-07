@@ -24,7 +24,7 @@ class SearchActivity : BaseActivity() {
                 SearchScreen().Screen(viewModel)
             }
         }
-        viewModel.searchRepoGithub("github search")
+//        viewModel.searchRepoGithub("github search")
     }
 }
 

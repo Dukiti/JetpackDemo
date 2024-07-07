@@ -1,6 +1,7 @@
 package com.dungnm.example.compose.ui.base
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.size
@@ -13,6 +14,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -22,7 +25,15 @@ abstract class BaseScreen<T : BaseViewModel> {
 
     @Composable
     open fun Screen(viewModel: T) {
+        val focusManager = LocalFocusManager.current
         Scaffold(
+            modifier = Modifier.pointerInput(Unit) {
+            detectTapGestures(onTap = {
+                focusManager.clearFocus()
+            }, onPress = {
+                focusManager.clearFocus()
+            })
+        },
             topBar = { ToolBar() },
             content = { innerPadding ->
                 LoadingDialog(viewModel = viewModel)
