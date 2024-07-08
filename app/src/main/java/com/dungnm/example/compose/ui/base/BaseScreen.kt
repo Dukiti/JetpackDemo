@@ -28,12 +28,12 @@ abstract class BaseScreen<T : BaseViewModel> {
         val focusManager = LocalFocusManager.current
         Scaffold(
             modifier = Modifier.pointerInput(Unit) {
-            detectTapGestures(onTap = {
-                focusManager.clearFocus()
-            }, onPress = {
-                focusManager.clearFocus()
-            })
-        },
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                }, onPress = {
+                    focusManager.clearFocus()
+                })
+            },
             topBar = { ToolBar() },
             content = { innerPadding ->
                 LoadingDialog(viewModel = viewModel)
@@ -43,10 +43,10 @@ abstract class BaseScreen<T : BaseViewModel> {
     }
 
     @Composable
-    abstract fun ContentView(viewModel: T, innerPadding : PaddingValues)
+    abstract fun ContentView(viewModel: T, innerPadding: PaddingValues)
 
     @Composable
-    private fun LoadingDialog(viewModel: T){
+    private fun LoadingDialog(viewModel: T) {
         val showDialog by viewModel.isLoading.observeAsState()
         if (showDialog == true) {
             Dialog(

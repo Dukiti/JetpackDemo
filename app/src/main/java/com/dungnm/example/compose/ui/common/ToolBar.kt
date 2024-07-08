@@ -17,9 +17,13 @@
 package com.dungnm.example.compose.ui.common
 
 import android.app.Activity
+import android.content.Intent
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ContactSupport
+import androidx.compose.material.icons.rounded.ArrowBackIosNew
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -31,6 +35,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.dungnm.example.compose.ui.base.BaseActivity
 import com.dungnm.example.compose.R
+import com.dungnm.example.compose.ui.activity.setting.SettingActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,21 +45,25 @@ fun ToolBar(
 ) {
     val crrContext = LocalContext.current
     val titleRes = (crrContext as? BaseActivity)?.titleRes ?: R.string.app_name
-    val defaultCLick : (() -> Unit) = {
+    val defaultCLick: (() -> Unit) = {
         (crrContext as? Activity)?.finish()
     }
-    CenterAlignedTopAppBar(
-        title = {
-            Text(stringResource(id = titleRes))
-        },
-        modifier = modifier.statusBarsPadding(),
-        navigationIcon = {
-            IconButton(onClick = onUpClick ?: defaultCLick) {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = null
-                )
-            }
-        },
-    )
+    CenterAlignedTopAppBar(title = {
+        Text(stringResource(id = titleRes))
+    }, modifier = modifier.statusBarsPadding(), navigationIcon = {
+        IconButton(onClick = onUpClick ?: defaultCLick) {
+            Icon(
+                Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null
+            )
+        }
+    }, actions = {
+        IconButton(onClick = {
+            val intent = Intent(crrContext, SettingActivity::class.java)
+            crrContext.startActivity(intent)
+        }) {
+            Icon(
+                Icons.Rounded.Settings, contentDescription = null
+            )
+        }
+    })
 }

@@ -41,24 +41,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.dungnm.example.compose.constants.Tags
 import com.dungnm.example.compose.model.response.RepoEntity
-import com.dungnm.example.compose.ui.activity.home.HomeActivity
+import com.dungnm.example.compose.ui.activity.detail.RepoDetailActivity
 import com.dungnm.example.compose.ui.base.BaseScreen
 import com.dungnm.example.compose.ui.theme.MainAppTheme
+import com.google.gson.Gson
 
 class SearchScreen : BaseScreen<SearchViewModel>() {
-
-    @Composable
-    override fun Screen(viewModel: SearchViewModel) {
-        super.Screen(viewModel)
-    }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun ContentView(viewModel: SearchViewModel, innerPadding: PaddingValues) {
-        val context = LocalContext.current
         val activity = LocalContext.current as? Activity
         val focusManager = LocalFocusManager.current
         val searchText by viewModel.searchText.collectAsState()
@@ -199,7 +195,8 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
     }
 
     private fun gotoDetail(activity: Activity?, repoEntity: RepoEntity) {
-        val intent = Intent(activity, HomeActivity::class.java)
+        val intent = Intent(activity, RepoDetailActivity::class.java)
+        intent.putExtra(Tags.DATA, Gson().toJson(repoEntity))
         activity?.startActivity(intent)
     }
 
@@ -223,7 +220,9 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
     @Composable
     fun Preview() {
         MainAppTheme {
-            Screen(hiltViewModel())
+            Screen(viewModel(modelClass = SearchViewModel::class.java))
         }
     }
+
+
 }

@@ -28,4 +28,5 @@ data class RepoEntity(
 data class OwnerEntity(
     @SerializedName("id") val id: Int,
     @SerializedName("avatar_url") val avatarUrl: String?,
+    @SerializedName("login") val login: String?,
 )

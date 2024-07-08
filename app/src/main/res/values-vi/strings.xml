@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label_gallery">Thư Viện</string>
+    <string name="label_login">Đăng nhập</string>
+    <string name="label_search">Tìm kiếm</string>
+    <string name="label_detail">Chi Tiết</string>
+</resources>
