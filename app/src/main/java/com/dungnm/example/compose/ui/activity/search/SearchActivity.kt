@@ -24,10 +24,8 @@ class SearchActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            MainAppTheme {
-                SearchScreen().Screen(viewModel)
-            }
+        setContentView {
+            SearchScreen().Screen(viewModel)
         }
 //        viewModel.searchRepoGithub("github search")
     }

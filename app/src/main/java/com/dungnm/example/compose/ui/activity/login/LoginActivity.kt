@@ -15,10 +15,8 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
-            MainAppTheme {
-                LoginScreen().Screen(viewModel = viewModel)
-            }
+        setContentView {
+            LoginScreen().Screen(viewModel = viewModel)
         }
     }
 }

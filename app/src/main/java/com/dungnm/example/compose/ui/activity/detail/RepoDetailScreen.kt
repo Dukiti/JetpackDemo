@@ -18,12 +18,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.dungnm.example.compose.R
 import com.dungnm.example.compose.ui.base.BaseScreen
+import com.dungnm.example.compose.ui.theme.ExtendTheme
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 
 class RepoDetailScreen : BaseScreen<RepoDetailViewModel>() {
@@ -56,15 +59,15 @@ class RepoDetailScreen : BaseScreen<RepoDetailViewModel>() {
                     .fillMaxWidth()
                     .align(Alignment.Start)
                 Text(
-                    text = "Chủ sở hữu: ${item?.owner?.login}",
-                    color = Color.Black,
+                    text = stringResource(id = R.string.label_owner_s, item?.owner?.login ?: "N/A"),
+                    color = ExtendTheme.current.colorDescription,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = textModifier
                 )
                 Text(
-                    text = "Tên: ${item?.fullName}",
-                    color = Color.Black,
+                    text = stringResource(id = R.string.label_name_s, item?.fullName ?: "N/A"),
+                    color = ExtendTheme.current.colorDescription,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = textModifier
@@ -72,37 +75,47 @@ class RepoDetailScreen : BaseScreen<RepoDetailViewModel>() {
 
                 if (item?.description.isNullOrBlank()) {
                     Text(
-                        text = "Mô tả: ${item?.description}",
-                        color = Color.Black,
+                        text = stringResource(
+                            id = R.string.label_description_s, item?.description ?: "N/A"
+                        ),
+                        color = ExtendTheme.current.colorDescription,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = textModifier
                     )
                 }
                 Text(
-                    text = "Số sao: ${item?.stargazersCount}",
-                    color = Color.Black,
+                    text = stringResource(
+                        id = R.string.label_star_s, item?.stargazersCount ?: "N/A"
+                    ),
+                    color = ExtendTheme.current.colorDescription,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = textModifier
                 )
                 Text(
-                    text = "Ngôn ngữ: ${item?.language ?: "N/A"}",
-                    color = Color.Black,
+                    text = stringResource(
+                        id = R.string.label_language_s, item?.language ?: "N/A"
+                    ),
+                    color = ExtendTheme.current.colorDescription,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = textModifier
                 )
                 Text(
-                    text = "Ngày tạo: ${item?.createdAt}",
-                    color = Color.Black,
+                    text = stringResource(
+                        id = R.string.label_created_at_s, item?.createdAt ?: "N/A"
+                    ),
+                    color = ExtendTheme.current.colorDescription,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = textModifier
                 )
                 Text(
-                    text = "Ngày cập nhật cuối: ${item?.updatedAt}",
-                    color = Color.Black,
+                    text = stringResource(
+                        id = R.string.label_updated_at_s, item?.updatedAt ?: "N/A"
+                    ),
+                    color = ExtendTheme.current.colorDescription,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = textModifier

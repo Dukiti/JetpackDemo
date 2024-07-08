@@ -45,12 +45,12 @@ class SettingScreen : BaseScreen<SettingViewModel>() {
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(selected = languageSelected == Tags.LANG_EN,
-                    onClick = { viewModel.updateLanguage(Tags.LANG_EN) })
+                    onClick = { viewModel.updateLanguage(Tags.LANG_EN, context) })
                 Text(stringResource(id = R.string.label_en))
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(selected = languageSelected == Tags.LANG_VI,
-                    onClick = { viewModel.updateLanguage(Tags.LANG_VI) })
+                    onClick = { viewModel.updateLanguage(Tags.LANG_VI, context) })
                 Text(stringResource(id = R.string.label_vi))
             }
 

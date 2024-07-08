@@ -20,11 +20,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.dungnm.example.compose.R
 import com.dungnm.example.compose.ui.activity.CommonViewModel
 import com.dungnm.example.compose.ui.activity.gallery.GalleryActivity
 import com.dungnm.example.compose.ui.activity.login.LoginActivity
@@ -65,13 +67,13 @@ class HomeScreen : BaseScreen<CommonViewModel>() {
             Button(modifier = modifier, onClick = {
                 openGallery(context, launcher)
             }) {
-                Text(text = "Gallery")
+                Text(text = stringResource(id = R.string.label_gallery))
             }
             Button(modifier = modifier, onClick = { openLoginForm(context) }) {
-                Text(text = "Login")
+                Text(text = stringResource(id = R.string.label_login))
             }
             Button(modifier = modifier, onClick = { openSearch(context) }) {
-                Text(text = "Github Search")
+                Text(text = stringResource(id = R.string.label_search))
             }
         }
     }

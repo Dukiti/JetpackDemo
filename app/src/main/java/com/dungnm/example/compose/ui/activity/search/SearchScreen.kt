@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,10 +44,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.dungnm.example.compose.R
 import com.dungnm.example.compose.constants.Tags
 import com.dungnm.example.compose.model.response.RepoEntity
 import com.dungnm.example.compose.ui.activity.detail.RepoDetailActivity
 import com.dungnm.example.compose.ui.base.BaseScreen
+import com.dungnm.example.compose.ui.theme.ExtendTheme
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 import com.google.gson.Gson
 
@@ -75,7 +78,7 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
                 active = false,
                 onActiveChange = {},
                 placeholder = {
-                    Text(text = "Search repo")
+                    Text(text = stringResource(id = R.string.label_search_hint))
                 },
                 enabled = true,
                 modifier = Modifier
@@ -132,7 +135,7 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
                 )
                 Text(
                     text = item?.fullName ?: item?.name ?: "N/A",
-                    color = Color.Blue,
+                    color = ExtendTheme.current.colorTitle,
                     fontSize = 16.sp,
                     fontStyle = FontStyle.Italic,
                     overflow = TextOverflow.Ellipsis,
@@ -144,7 +147,7 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
             if (!item?.description.isNullOrEmpty()) {
                 Text(
                     item?.description ?: "N/A",
-                    color = Color.Black,
+                    color = ExtendTheme.current.colorDescription,
                     fontSize = 12.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -184,7 +187,7 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
                     }
                     .alpha(if (page == 1) 0.2f else 1f),
             )
-            Text(text = "$page", fontSize = 32.sp, color = Color.Blue)
+            Text(text = "$page", fontSize = 32.sp, color = ExtendTheme.current.colorTitle)
             Image(imageVector = Icons.Rounded.ArrowForwardIos,
                 contentDescription = "next",
                 colorFilter = ColorFilter.tint(Color.Gray),

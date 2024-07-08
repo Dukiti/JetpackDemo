@@ -1,10 +1,10 @@
 package com.dungnm.example.compose.ui.activity.setting
 
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
+import android.content.Context
 import com.dungnm.example.compose.constants.Tags
 import com.dungnm.example.compose.ui.base.BaseViewModel
+import com.dungnm.example.compose.utils.Storage
+import com.dungnm.example.compose.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingViewModel @Inject constructor(
-    private val sdf: SharedPreferences
 ) : BaseViewModel() {
 
     private val _languageSelected = MutableStateFlow(Tags.LANG_EN)
@@ -21,22 +20,26 @@ class SettingViewModel @Inject constructor(
     private val _themeSelected = MutableStateFlow(Tags.THEME_LIGHT)
     val themeSelected: StateFlow<String> = _themeSelected
 
+
     init {
-        val lang = sdf.getString(Tags.LANGUAGE, Tags.LANG_EN) ?: Tags.LANG_EN
+        val lang = Storage.getInstance().getString(Tags.LANGUAGE, Tags.LANG_EN) ?: Tags.LANG_EN
         _languageSelected.value = lang
 
-        val theme = sdf.getString(Tags.THEME, Tags.THEME_LIGHT) ?: Tags.THEME_LIGHT
+        val theme =
+            Storage.getInstance().getString(Tags.THEME, Tags.THEME_LIGHT) ?: Tags.THEME_LIGHT
         _themeSelected.value = theme
     }
 
 
-    fun updateLanguage(lang: String) {
+    fun updateLanguage(lang: String, context: Context) {
         _languageSelected.value = lang
-        sdf.edit().putString(Tags.LANGUAGE, lang).apply()
+        Storage.getInstance().putString(Tags.LANGUAGE, lang)
+        Utils.changeLanguage(lang, context)
     }
 
     fun updateTheme(theme: String) {
         _themeSelected.value = theme
-        sdf.edit().putString(Tags.THEME, theme).apply()
+        currentTheme.value = theme
+        Storage.getInstance().putString(Tags.THEME, theme)
     }
 }

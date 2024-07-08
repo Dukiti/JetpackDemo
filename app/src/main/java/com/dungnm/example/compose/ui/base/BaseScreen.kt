@@ -1,5 +1,9 @@
 package com.dungnm.example.compose.ui.base
 
+import android.app.LocaleManager
+import android.content.Context
+import android.os.Build
+import android.os.LocaleList
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -20,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.dungnm.example.compose.ui.common.ToolBar
+import java.util.Locale
 
 abstract class BaseScreen<T : BaseViewModel> {
 

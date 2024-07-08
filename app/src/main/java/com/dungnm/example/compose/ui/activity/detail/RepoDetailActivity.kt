@@ -23,10 +23,8 @@ class RepoDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            MainAppTheme {
-                RepoDetailScreen().Screen(viewModel)
-            }
+        setContentView {
+            RepoDetailScreen().Screen(viewModel)
         }
         initData()
     }

@@ -4,4 +4,19 @@
     <string name="label_login">Đăng nhập</string>
     <string name="label_search">Tìm kiếm</string>
     <string name="label_detail">Chi Tiết</string>
+    <string name="label_setting">Cài đặt</string>
+    <string name="label_language">Ngôn ngữ</string>
+    <string name="label_theme">Theme</string>
+    <string name="label_dark">Tối</string>
+    <string name="label_light">Sáng</string>
+    <string name="label_en">Tiếng Anh</string>
+    <string name="label_vi">Tiếng Việt</string>
+    <string name="label_search_hint">Tìm kiếm</string>
+    <string name="label_owner_s">Chủ sở hữu: %s</string>
+    <string name="label_name_s">Tên: %s</string>
+    <string name="label_description_s">Mô tả: %s</string>
+    <string name="label_star_s">Số sao: %s</string>
+    <string name="label_language_s">Ngôn ngữ: %s</string>
+    <string name="label_created_at_s">Ngày tạo: %s</string>
+    <string name="label_updated_at_s">Ngày cập nhật: %s</string>
 </resources>
