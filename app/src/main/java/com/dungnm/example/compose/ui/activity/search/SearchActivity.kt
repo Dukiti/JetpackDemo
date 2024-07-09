@@ -30,6 +30,5 @@ class SearchActivity : BaseActivity() {
 //        viewModel.searchRepoGithub("github search")
     }
 
-
 }
 

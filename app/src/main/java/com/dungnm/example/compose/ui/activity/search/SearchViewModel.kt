@@ -3,12 +3,10 @@ package com.dungnm.example.compose.ui.activity.search
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dungnm.example.compose.model.response.RepoEntity
-import com.dungnm.example.compose.model.response.SearchResponse
 import com.dungnm.example.compose.network.repo.GithubRepo
 import com.dungnm.example.compose.ui.base.BaseViewModel
+import com.dungnm.example.compose.ui.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -29,6 +27,9 @@ class SearchViewModel @Inject constructor(
 
     private val _pageIndex = MutableStateFlow(1)
     val pageIndex: StateFlow<Int> = _pageIndex
+
+    private val _loadPage = MutableStateFlow(false)
+    val loadPage: StateFlow<Boolean> = _loadPage
 
     init {
         viewModelScope.launch {
@@ -67,11 +68,14 @@ class SearchViewModel @Inject constructor(
 
     private suspend fun getSearchResults(searchKey: String?) {
         try {
+            _loadPage.value = true
             val res = githubRepo.search(searchKey ?: "", pageIndex.value)
             Log.e("123123", "searchRepoGithub: ${res.items.size}")
             _listRepo.value = res.items
         } catch (e: Exception) {
             e.printStackTrace()
+        } finally {
+            _loadPage.value = false
         }
     }
 }

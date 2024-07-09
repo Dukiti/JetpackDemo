@@ -3,6 +3,8 @@
     <string name="label_gallery">Gallery</string>
     <string name="label_login">Login</string>
     <string name="label_search">Github Search</string>
+    <string name="label_search_des">Enter to search</string>
+    <string name="label_search_not_found">Not Found</string>
     <string name="label_detail">Detail</string>
     <string name="label_setting">Setting</string>
     <string name="label_language">Language</string>

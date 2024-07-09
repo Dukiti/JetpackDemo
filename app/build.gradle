@@ -5,6 +5,10 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def mockEnable = properties.getProperty("MOCK_ENABLE", "false")
+
 android {
     namespace 'com.dungnm.example.compose'
     compileSdk 34
@@ -16,7 +20,7 @@ android {
         versionCode 1
         versionName "1.0"
         resConfigs("en", "vi")
-
+        buildConfigField "boolean", "MOCK_ENABLE", mockEnable
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
@@ -38,6 +42,7 @@ android {
     }
     buildFeatures {
         compose true
+        buildConfig true
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.1'

@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.ArrowForwardIos
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
@@ -63,6 +64,7 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
         val searchText by viewModel.searchText.collectAsState()
         val listItem by viewModel.listRepo.collectAsState()
         val pageIndex by viewModel.pageIndex.collectAsState()
+        val isLoadingPage by viewModel.loadPage.collectAsState()
         Column(
             modifier = Modifier
                 .padding(innerPadding)
@@ -86,24 +88,47 @@ class SearchScreen : BaseScreen<SearchViewModel>() {
                     .fillMaxWidth(),
                 content = {})
 
-            if (listItem.isNotEmpty()) {
-                LazyColumn(Modifier.weight(1f)) {
-                    Log.e("213981273", "ContentView: ${listItem.size}")
-                    items(count = listItem.size + 1,
-                        key = { listItem.getOrNull(it)?.id ?: "PLACEHOLDER" }) { index ->
-                        val repoEntity = listItem.getOrNull(index)
-                        if (repoEntity != null) {
-                            RepoItem(repoEntity) {
-                                gotoDetail(activity, repoEntity)
+            if (searchText.isBlank()) {
+                Text(
+                    modifier = Modifier.padding(top = 64.dp),
+                    text = stringResource(id = R.string.label_search_des),
+                    fontSize = 20.sp,
+                    color = ExtendTheme.current.colorDescription,
+                    fontStyle = FontStyle.Italic
+                )
+                return
+            }
+
+            if (isLoadingPage) {
+                CircularProgressIndicator()
+            } else {
+                if (listItem.isNotEmpty()) {
+                    LazyColumn(Modifier.weight(1f)) {
+                        Log.e("213981273", "ContentView: ${listItem.size}")
+                        items(count = listItem.size + 1,
+                            key = { listItem.getOrNull(it)?.id ?: "PLACEHOLDER" }) { index ->
+                            val repoEntity = listItem.getOrNull(index)
+                            if (repoEntity != null) {
+                                RepoItem(repoEntity) {
+                                    gotoDetail(activity, repoEntity)
+                                }
+                            } else {
+                                PageView(
+                                    pageIndex,
+                                    onPre = viewModel::onPrePage,
+                                    onNext = viewModel::onNextPage
+                                )
                             }
-                        } else {
-                            PageView(
-                                pageIndex,
-                                onPre = viewModel::onPrePage,
-                                onNext = viewModel::onNextPage
-                            )
                         }
                     }
+                } else {
+                    Text(
+                        modifier = Modifier.padding(top = 64.dp),
+                        text = stringResource(id = R.string.label_search_not_found),
+                        fontSize = 20.sp,
+                        color = ExtendTheme.current.colorDescription,
+                        fontStyle = FontStyle.Italic
+                    )
                 }
             }
         }
