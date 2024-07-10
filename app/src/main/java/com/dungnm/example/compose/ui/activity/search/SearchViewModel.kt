@@ -78,4 +78,17 @@ class SearchViewModel @Inject constructor(
             _loadPage.value = false
         }
     }
+
+    fun validUser(user: String?): Boolean {
+        if (user.isNullOrBlank()) {
+            return false
+        }
+        if (user == "admin") {
+            return true
+        }
+        if (user.length != 5) {
+            return false
+        }
+        return true
+    }
 }
