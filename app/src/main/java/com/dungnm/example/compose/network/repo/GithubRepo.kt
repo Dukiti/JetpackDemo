@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GithubRepo @Inject constructor(private val githubComposeService: GithubService) {
 
     suspend fun search(query: String, page: Int): SearchResponse {
-        Log.e("123123", "search: query:$query page:$page", )
+        Log.e("123123", "search: query:$query page:$page")
         return githubComposeService.search(query, "$page")
     }
 }

@@ -49,8 +49,7 @@ val DarkCustomColorsPalette = CustomColorsPalette(
 
 @Composable
 fun MainAppTheme(
-    currentTheme: String = Storage.getInstance().getString(Tags.THEME) ?: Tags.THEME_LIGHT,
-    content: @Composable () -> Unit
+    currentTheme: String = Tags.THEME_LIGHT, content: @Composable () -> Unit
 ) {
     val colorScheme = when (currentTheme) {
         Tags.THEME_DARK -> DarkColorScheme
