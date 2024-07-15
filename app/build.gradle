@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.dungnm.example.compose"
-        minSdk 21
+        minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -34,6 +34,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        test {
+            java.srcDirs = ['src/test/java', 'src/main/java']
+        }
+    }
+
     flavorDimensions "default"
     productFlavors {
         sit {
@@ -106,7 +112,9 @@ dependencies {
     androidTestImplementation libs.androidx.ui.test.junit4
     debugImplementation libs.androidx.ui.tooling
     debugImplementation libs.androidx.ui.test.manifest
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+    androidTestImplementation "io.mockk:mockk-android:1.12.0"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
 
     androidTestImplementation libs.hilt.android.testing
     kaptAndroidTest libs.hilt.android.compiler

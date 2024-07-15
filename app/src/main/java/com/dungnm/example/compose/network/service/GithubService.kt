@@ -6,9 +6,11 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
+const val SEARCH_PATH = "search/repositories"
+
 interface GithubService {
 
-    @GET("search/repositories")
+    @GET(SEARCH_PATH)
     suspend fun search(
         @Query("q") query: String,
         @Query("page") page: String,

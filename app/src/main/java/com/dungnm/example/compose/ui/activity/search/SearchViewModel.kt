@@ -38,7 +38,7 @@ class SearchViewModel @Inject constructor(
                     return@collectLatest
                 }
                 _pageIndex.value = 1
-                getSearchResults(input)
+                getSearchResults(input, _pageIndex.value)
             }
         }
     }
@@ -53,25 +53,26 @@ class SearchViewModel @Inject constructor(
             if (currentPage <= 1) {
                 return@launch
             }
-            _pageIndex.value = (currentPage - 1).coerceAtLeast(1)
-            getSearchResults(_searchText.value)
+            val newPage = (currentPage - 1).coerceAtLeast(1)
+            getSearchResults(_searchText.value, newPage)
         }
     }
 
     fun onNextPage() {
         viewModelScope.launch {
-            _pageIndex.value += 1
-            getSearchResults(_searchText.value)
+            val newPage =   _pageIndex.value + 1
+            getSearchResults(_searchText.value, newPage)
         }
     }
 
 
-    private suspend fun getSearchResults(searchKey: String?) {
+    suspend fun getSearchResults(searchKey: String?, pageIndex: Int) {
         try {
             _loadPage.value = true
-            val res = githubRepo.search(searchKey ?: "", pageIndex.value)
+            val res = githubRepo.search(searchKey ?: "", pageIndex)
             Log.e("123123", "searchRepoGithub: ${res.items.size}")
             _listRepo.value = res.items
+            _pageIndex.value = pageIndex
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {

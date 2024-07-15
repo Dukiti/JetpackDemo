@@ -9,6 +9,7 @@ class GithubRepo @Inject constructor(private val githubComposeService: GithubSer
 
     suspend fun search(query: String, page: Int): SearchResponse {
         Log.e("123123", "search: query:$query page:$page")
+        Log.e("12391237", "GithubRepo: ${Thread.currentThread().id}", )
         return githubComposeService.search(query, "$page")
     }
 }
