@@ -3,9 +3,9 @@ package com.dungnm.example.compose.ui.activity.search
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.dungnm.example.compose.model.response.RepoEntity
-import com.dungnm.example.compose.network.repo.GithubRepo
+import com.dungnm.example.compose.network.repo.github.GithubRepo
+import com.dungnm.example.compose.network.repo.github.IGithubRepo
 import com.dungnm.example.compose.ui.base.BaseViewModel
-import com.dungnm.example.compose.ui.model.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val githubRepo: GithubRepo
+    private val githubRepo: IGithubRepo
 ) : BaseViewModel() {
 
     private val _searchText = MutableStateFlow("")
@@ -38,7 +38,7 @@ class SearchViewModel @Inject constructor(
                     return@collectLatest
                 }
                 _pageIndex.value = 1
-                getSearchResults(input, _pageIndex.value)
+                getSearchResults(input, 1)
             }
         }
     }
@@ -53,20 +53,19 @@ class SearchViewModel @Inject constructor(
             if (currentPage <= 1) {
                 return@launch
             }
-            val newPage = (currentPage - 1).coerceAtLeast(1)
-            getSearchResults(_searchText.value, newPage)
+            val pageIndex = (currentPage - 1).coerceAtLeast(1)
+            getSearchResults(_searchText.value, pageIndex)
         }
     }
 
     fun onNextPage() {
         viewModelScope.launch {
-            val newPage =   _pageIndex.value + 1
-            getSearchResults(_searchText.value, newPage)
+            getSearchResults(_searchText.value, _pageIndex.value + 1)
         }
     }
 
 
-    suspend fun getSearchResults(searchKey: String?, pageIndex: Int) {
+    private suspend fun getSearchResults(searchKey: String?, pageIndex: Int) {
         try {
             _loadPage.value = true
             val res = githubRepo.search(searchKey ?: "", pageIndex)

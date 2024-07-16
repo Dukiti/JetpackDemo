@@ -1,7 +1,6 @@
 package com.dungnm.example.compose.di
 
 import android.content.Context
-import com.dungnm.example.compose.BuildConfig
 import com.dungnm.example.compose.constants.DomainProperties
 import com.dungnm.example.compose.network.mock.GithubServiceMock
 import com.dungnm.example.compose.network.mock.MockFactory
@@ -27,12 +26,9 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         return OkHttpClient.Builder().apply {
-//            val interceptor = HttpLoggingInterceptor()
-//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-//            addInterceptor(interceptor)
-            if (BuildConfig.MOCK_ENABLE) {
-                addInterceptor(MockInterceptor(context))
-            }
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            addInterceptor(interceptor)
             readTimeout(60, TimeUnit.SECONDS)
             connectTimeout(60, TimeUnit.SECONDS)
             writeTimeout(60, TimeUnit.SECONDS)
@@ -49,9 +45,6 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideGithubComposeService(retrofit: Retrofit): GithubService {
-        if (BuildConfig.MOCK_ENABLE) {
-            MockFactory.g().putPock(GithubServiceMock())
-        }
         return retrofit.create(GithubService::class.java)
     }
 }
