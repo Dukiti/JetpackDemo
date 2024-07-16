@@ -1,36 +1,24 @@
 package com.dungnm.example.compose.ui.activity.login
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import com.dungnm.example.compose.network.repo.ILoginRepo
 import com.dungnm.example.compose.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : BaseViewModel() {
+class LoginViewModel @Inject constructor(
+    private val loginRepo: ILoginRepo
+) : BaseViewModel() {
 
     private val _loginResLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val loginResLiveData: MutableLiveData<Boolean> = _loginResLiveData
 
-    fun login(user: String?, pass: String?) {
-        viewModelScope.launch(Dispatchers.IO) {
-            isLoading.postValue(true)
-            try {
-                delay(3000)
-                if (user == "admin" && pass == "admin") {
-                    _loginResLiveData.postValue(true)
-                } else {
-                    _loginResLiveData.postValue(false)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                isLoading.postValue(false)
-            }
-        }
+    fun login(user: String?, pass: String?) = launch {
+        delay(3000)
+        val loginSuccess = loginRepo.login(user, pass)
+        _loginResLiveData.postValue(loginSuccess)
     }
 
 }

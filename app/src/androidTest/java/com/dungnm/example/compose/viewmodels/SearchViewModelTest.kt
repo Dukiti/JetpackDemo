@@ -1,6 +1,7 @@
-package com.dungnm.example.compose
+package com.dungnm.example.compose.viewmodels
 
-import com.dungnm.example.compose.network.repo.github.IGithubRepo
+import com.dungnm.example.compose.MainCoroutineRule
+import com.dungnm.example.compose.network.repo.IGithubRepo
 import com.dungnm.example.compose.ui.activity.search.SearchViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -41,6 +42,7 @@ class SearchViewModelTest {
 
     @Test
     fun testLoadDataSuccess() = runTest {
+        viewModel.initialize()
         viewModel.onSearch("load_data")
         advanceUntilIdle()
         Assert.assertEquals(10, viewModel.listRepo.value.size)
@@ -59,13 +61,15 @@ class SearchViewModelTest {
 
     @Test
     fun testLoadDataMaxPage() = runTest {
+        viewModel.initialize()
         viewModel.onSearch("max_page")
         advanceUntilIdle()
-        Assert.assertTrue(viewModel.listRepo.value.size < 10)
+        Assert.assertTrue(viewModel.listRepo.value.size in 1..9)
     }
 
     @Test
     fun testOnNextPageSuccess() = runTest {
+        viewModel.initialize()
         viewModel.onSearch("load_data")
         advanceUntilIdle()
         val currentPage = viewModel.pageIndex.value
@@ -76,6 +80,7 @@ class SearchViewModelTest {
 
     @Test
     fun testOnPrePageSuccess() = runTest {
+        viewModel.initialize()
         viewModel.onSearch("load_data")
         advanceUntilIdle()
         val currentPage = viewModel.pageIndex.value

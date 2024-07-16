@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.network.repo.github
+package com.dungnm.example.compose.network.repo
 
 import com.dungnm.example.compose.model.response.SearchResponse
 

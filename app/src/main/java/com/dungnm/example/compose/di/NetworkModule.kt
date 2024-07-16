@@ -2,9 +2,6 @@ package com.dungnm.example.compose.di
 
 import android.content.Context
 import com.dungnm.example.compose.constants.DomainProperties
-import com.dungnm.example.compose.network.mock.GithubServiceMock
-import com.dungnm.example.compose.network.mock.MockFactory
-import com.dungnm.example.compose.network.mock.MockInterceptor
 import com.dungnm.example.compose.network.service.GithubService
 import dagger.Module
 import dagger.Provides

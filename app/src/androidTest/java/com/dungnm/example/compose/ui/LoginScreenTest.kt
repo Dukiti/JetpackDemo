@@ -1,10 +1,11 @@
-package com.dungnm.example.compose
+package com.dungnm.example.compose.ui
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.InstrumentationRegistry
+import com.dungnm.example.compose.R
 import com.dungnm.example.compose.constants.Tags
 import com.dungnm.example.compose.ui.activity.CommonViewModel
 import com.dungnm.example.compose.ui.activity.home.HomeScreen

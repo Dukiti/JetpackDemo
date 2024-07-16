@@ -1,10 +1,8 @@
 package com.dungnm.example.compose.ui.activity.search
 
 import android.util.Log
-import androidx.lifecycle.viewModelScope
 import com.dungnm.example.compose.model.response.RepoEntity
-import com.dungnm.example.compose.network.repo.github.GithubRepo
-import com.dungnm.example.compose.network.repo.github.IGithubRepo
+import com.dungnm.example.compose.network.repo.IGithubRepo
 import com.dungnm.example.compose.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,15 +29,15 @@ class SearchViewModel @Inject constructor(
     private val _loadPage = MutableStateFlow(false)
     val loadPage: StateFlow<Boolean> = _loadPage
 
-    init {
-        viewModelScope.launch {
-            _searchText.debounce(300).collectLatest { input ->
-                if (input.isBlank()) {
-                    return@collectLatest
-                }
-                _pageIndex.value = 1
-                getSearchResults(input, 1)
+    fun initialize() = mainScope.launch {
+        Log.e("1239123879012", "initialize: 1239123879012")
+        _searchText.debounce(300).collectLatest { input ->
+            Log.e("1239123879012", "initialize: input")
+            if (input.isBlank()) {
+                return@collectLatest
             }
+            _pageIndex.value = 1
+            getSearchResults(input, 1)
         }
     }
 
@@ -47,21 +45,19 @@ class SearchViewModel @Inject constructor(
         _searchText.value = query
     }
 
-    fun onPrePage() {
-        viewModelScope.launch {
-            val currentPage = _pageIndex.value
-            if (currentPage <= 1) {
-                return@launch
-            }
-            val pageIndex = (currentPage - 1).coerceAtLeast(1)
-            getSearchResults(_searchText.value, pageIndex)
+    fun onPrePage() = launchSilent {
+        val currentPage = _pageIndex.value
+        if (currentPage <= 1) {
+            return@launchSilent
         }
+        val pageIndex = (currentPage - 1).coerceAtLeast(1)
+        getSearchResults(_searchText.value, pageIndex)
     }
 
-    fun onNextPage() {
-        viewModelScope.launch {
-            getSearchResults(_searchText.value, _pageIndex.value + 1)
-        }
+
+    fun onNextPage() = launchSilent {
+        Log.e("21387692", "onNextPage: ${Thread.currentThread().name} -- ${Thread.currentThread().id}")
+        getSearchResults(_searchText.value, _pageIndex.value + 1)
     }
 
 

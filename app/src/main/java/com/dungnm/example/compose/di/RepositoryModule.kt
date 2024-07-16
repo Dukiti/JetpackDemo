@@ -2,10 +2,13 @@ package com.dungnm.example.compose.di
 
 import android.content.Context
 import com.dungnm.example.compose.BuildConfig
-import com.dungnm.example.compose.network.service.GithubService
 import com.dungnm.example.compose.network.repo.github.GithubRepo
-import com.dungnm.example.compose.network.repo.github.IGithubRepo
+import com.dungnm.example.compose.network.repo.IGithubRepo
 import com.dungnm.example.compose.network.repo.github.MockGithubRepo
+import com.dungnm.example.compose.network.repo.ILoginRepo
+import com.dungnm.example.compose.network.repo.login.LoginRepo
+import com.dungnm.example.compose.network.repo.login.MockLoginRepo
+import com.dungnm.example.compose.network.service.GithubService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +29,18 @@ object RepositoryModule {
             MockGithubRepo(context)
         } else {
             GithubRepo(githubService)
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideLoginRepo(
+        @ApplicationContext context: Context, githubService: GithubService
+    ): ILoginRepo {
+        return if (BuildConfig.MOCK_ENABLE) {
+            MockLoginRepo()
+        } else {
+            LoginRepo()
         }
     }
 }

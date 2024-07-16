@@ -56,6 +56,10 @@ import com.google.gson.Gson
 
 class SearchScreen : BaseScreen<SearchViewModel>() {
 
+    override fun preInitView(viewModel: SearchViewModel) {
+        viewModel.initialize()
+    }
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun ContentView(viewModel: SearchViewModel, innerPadding: PaddingValues) {

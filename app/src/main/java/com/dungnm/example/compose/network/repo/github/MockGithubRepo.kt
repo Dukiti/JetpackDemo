@@ -2,6 +2,7 @@ package com.dungnm.example.compose.network.repo.github
 
 import android.content.Context
 import com.dungnm.example.compose.model.response.SearchResponse
+import com.dungnm.example.compose.network.repo.IGithubRepo
 import com.google.gson.Gson
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException

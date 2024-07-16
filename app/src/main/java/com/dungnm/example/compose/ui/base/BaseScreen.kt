@@ -28,23 +28,22 @@ import java.util.Locale
 
 abstract class BaseScreen<T : BaseViewModel> {
 
+    open fun preInitView(viewModel: T) {}
+
     @Composable
     open fun Screen(viewModel: T) {
+        preInitView(viewModel)
         val focusManager = LocalFocusManager.current
-        Scaffold(
-            modifier = Modifier.pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    focusManager.clearFocus()
-                }, onPress = {
-                    focusManager.clearFocus()
-                })
-            },
-            topBar = { ToolBar() },
-            content = { innerPadding ->
-                LoadingDialog(viewModel = viewModel)
-                ContentView(viewModel, innerPadding)
-            }
-        )
+        Scaffold(modifier = Modifier.pointerInput(Unit) {
+            detectTapGestures(onTap = {
+                focusManager.clearFocus()
+            }, onPress = {
+                focusManager.clearFocus()
+            })
+        }, topBar = { ToolBar() }, content = { innerPadding ->
+            LoadingDialog(viewModel = viewModel)
+            ContentView(viewModel, innerPadding)
+        })
     }
 
     @Composable
