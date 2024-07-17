@@ -60,6 +60,10 @@ abstract class BaseViewModel : ViewModel() {
 
     fun launchSilent(block: suspend CoroutineScope.() -> Unit): Job {
         return mainScope.launch {
+            Log.e(
+                "search23912868",
+                "launchSilent : ${Thread.currentThread().name} - ${Thread.currentThread().id}"
+            )
             try {
                 block.invoke(mainScope)
             } finally {

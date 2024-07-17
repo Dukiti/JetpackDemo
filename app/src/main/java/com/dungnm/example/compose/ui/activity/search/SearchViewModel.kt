@@ -2,9 +2,13 @@ package com.dungnm.example.compose.ui.activity.search
 
 import android.util.Log
 import com.dungnm.example.compose.model.response.RepoEntity
+import com.dungnm.example.compose.model.response.SearchResponse
 import com.dungnm.example.compose.network.repo.IGithubRepo
 import com.dungnm.example.compose.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -73,5 +77,21 @@ class SearchViewModel @Inject constructor(
         } finally {
             _loadPage.value = false
         }
+    }
+
+
+    val resAll = MutableStateFlow<List<SearchResponse>>(emptyList())
+    fun getDefault() = launch {
+        val job1 = async<SearchResponse> {
+             githubRepo.search("load_data", 1)
+        }
+        val job2 = async {
+             githubRepo.search("load_data", 1)
+        }
+        val job3 = async {
+             githubRepo.search("load_data", 1)
+        }
+        val listJob = listOf(job1, job2, job3)
+        resAll.value = listJob.awaitAll()
     }
 }

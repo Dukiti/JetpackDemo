@@ -34,14 +34,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        test {
-            java.srcDirs = ['src/test/java', 'src/main/java']
-        }
-    }
 
     flavorDimensions "default"
     productFlavors {
+        dev {
+            dimension "default"
+        }
         sit {
             dimension "default"
         }
@@ -50,6 +48,17 @@ android {
         }
     }
 
+    sourceSets {
+        sit {
+            java.srcDir 'src/common/java'
+        }
+        uat {
+            java.srcDir 'src/common/java'
+        }
+        test {
+            java.srcDirs = ['src/test/java', 'src/main/java']
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -87,14 +96,8 @@ dependencies {
     implementation libs.androidx.material.icons.extended
 
     // retrofit
-
-    /*Using for SIT variant*/
-    sitImplementation(libs.retrofit.sit)
-    sitImplementation(libs.retrofit.gson.sit)
-
-    /*Using for UAT variant*/
-    uatImplementation(libs.retrofit.uat)
-    uatImplementation(libs.retrofit.gson.uat)
+    implementation(libs.retrofit.sit)
+    implementation(libs.retrofit.gson.sit)
 
 
     implementation libs.logging.interceptor
