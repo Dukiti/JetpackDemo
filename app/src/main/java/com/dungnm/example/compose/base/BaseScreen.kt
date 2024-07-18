@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.ui.base
+package com.dungnm.example.compose.base
 
 import android.app.LocaleManager
 import android.content.Context

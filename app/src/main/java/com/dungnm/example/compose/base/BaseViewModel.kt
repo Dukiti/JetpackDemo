@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.ui.base
+package com.dungnm.example.compose.base
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,18 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dungnm.example.compose.constants.Tags
 import com.dungnm.example.compose.utils.Storage
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
+import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 abstract class BaseViewModel : ViewModel() {
     val isLoading = MutableLiveData(false)
-    val errCode: MutableLiveData<ErrorCode> = MutableLiveData()
+    val errCode: MutableLiveData<Error> = MutableLiveData()
     val currentTheme = MutableStateFlow(Tags.THEME_LIGHT)
 
     init {
@@ -27,21 +29,9 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-        val code = when (throwable) {
-            is SocketTimeoutException -> {
-                ErrorCode.TIME_OUT
-            }
-
-            is UnknownHostException -> {
-                ErrorCode.UNKNOWN_HOST
-            }
-
-            else -> {
-                ErrorCode.COMMON_ERR
-            }
-        }
-        errCode.postValue(code)
-        Log.e("2139728", "exceptionHandler: ${code.name}")
+        val error = parseException(throwable)
+        Log.e("base_log", "BaseViewModel_exceptionHandler: error : $error")
+        onError(error)
     }
 
     val mainScope = viewModelScope.plus(exceptionHandler)
@@ -72,11 +62,50 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
+    open fun onError(error: Error) {
+        errCode.postValue(error)
+    }
+
     fun updateTheme() {
         val theme =
             Storage.getInstance().getString(Tags.THEME, Tags.THEME_LIGHT) ?: Tags.THEME_LIGHT
         if (theme != currentTheme.value) {
             currentTheme.value = theme
+        }
+    }
+
+    private fun parseException(exception: Throwable): Error {
+        return when (exception) {
+            is SocketTimeoutException -> {
+                Error.TimeOutError
+            }
+
+            is UnknownHostException -> {
+                Error.UnknownError
+            }
+
+            is HttpException -> {
+                parseHttpException(exception)
+            }
+
+            else -> {
+                Error.UnknownError
+            }
+        }
+    }
+
+    private fun parseHttpException(exception: HttpException): Error {
+        val code = exception.code()
+        if (code == 503) {
+            val dataErr = exception.response()?.errorBody()?.string()
+            val response: ErrResponse? = Gson().fromJson(dataErr, ErrResponse::class.java)
+            if (response == null) {
+                return Error.ServerError("-1", null, null)
+            } else {
+                return Error.ServerError(response.code, response.des, dataErr)
+            }
+        } else {
+            return Error.HttpError("$code")
         }
     }
 }

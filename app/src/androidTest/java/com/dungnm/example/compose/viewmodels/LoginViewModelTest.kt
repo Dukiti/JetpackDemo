@@ -1,9 +1,9 @@
 package com.dungnm.example.compose.viewmodels
 
 import com.dungnm.example.compose.MainCoroutineRule
+import com.dungnm.example.compose.base.Error
 import com.dungnm.example.compose.network.repo.ILoginRepo
 import com.dungnm.example.compose.ui.activity.login.LoginViewModel
-import com.dungnm.example.compose.ui.base.ErrorCode
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -52,7 +52,7 @@ class LoginViewModelTest {
     fun testLoginFail() = runTest {
         viewModel.login("a", "a")
         advanceUntilIdle()
-        Assert.assertEquals(ErrorCode.UNKNOWN_HOST, viewModel.errCode.value)
+        Assert.assertTrue(viewModel.errCode.value is Error)
     }
 
 

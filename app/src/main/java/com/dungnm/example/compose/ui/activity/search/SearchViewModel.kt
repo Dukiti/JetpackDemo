@@ -4,9 +4,8 @@ import android.util.Log
 import com.dungnm.example.compose.model.response.RepoEntity
 import com.dungnm.example.compose.model.response.SearchResponse
 import com.dungnm.example.compose.network.repo.IGithubRepo
-import com.dungnm.example.compose.ui.base.BaseViewModel
+import com.dungnm.example.compose.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,8 +71,6 @@ class SearchViewModel @Inject constructor(
             Log.e("123123", "searchRepoGithub: ${res.items.size}")
             _listRepo.value = res.items
             _pageIndex.value = pageIndex
-        } catch (e: Exception) {
-            e.printStackTrace()
         } finally {
             _loadPage.value = false
         }
@@ -81,7 +78,7 @@ class SearchViewModel @Inject constructor(
 
 
     val resAll = MutableStateFlow<List<SearchResponse>>(emptyList())
-    fun getDefault() = launch {
+    fun getConfig() = launch {
         val job1 = async<SearchResponse> {
              githubRepo.search("load_data", 1)
         }

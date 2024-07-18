@@ -2,7 +2,7 @@ package com.dungnm.example.compose.ui.activity.detail
 
 import androidx.compose.runtime.mutableStateOf
 import com.dungnm.example.compose.model.response.RepoEntity
-import com.dungnm.example.compose.ui.base.BaseViewModel
+import com.dungnm.example.compose.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

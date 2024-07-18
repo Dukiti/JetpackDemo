@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.dungnm.example.compose.R
-import com.dungnm.example.compose.ui.base.BaseScreen
+import com.dungnm.example.compose.base.BaseScreen
 import com.dungnm.example.compose.ui.theme.ExtendTheme
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 

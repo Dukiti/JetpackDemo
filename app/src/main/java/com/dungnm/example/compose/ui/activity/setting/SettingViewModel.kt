@@ -2,7 +2,7 @@ package com.dungnm.example.compose.ui.activity.setting
 
 import android.content.Context
 import com.dungnm.example.compose.constants.Tags
-import com.dungnm.example.compose.ui.base.BaseViewModel
+import com.dungnm.example.compose.base.BaseViewModel
 import com.dungnm.example.compose.utils.Storage
 import com.dungnm.example.compose.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel

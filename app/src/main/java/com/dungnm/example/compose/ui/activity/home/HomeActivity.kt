@@ -5,7 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.dungnm.example.compose.ui.activity.CommonViewModel
-import com.dungnm.example.compose.ui.base.BaseActivity
+import com.dungnm.example.compose.base.BaseActivity
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -49,7 +49,7 @@ import com.dungnm.example.compose.R
 import com.dungnm.example.compose.constants.Tags
 import com.dungnm.example.compose.model.response.RepoEntity
 import com.dungnm.example.compose.ui.activity.detail.RepoDetailActivity
-import com.dungnm.example.compose.ui.base.BaseScreen
+import com.dungnm.example.compose.base.BaseScreen
 import com.dungnm.example.compose.ui.theme.ExtendTheme
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 import com.google.gson.Gson

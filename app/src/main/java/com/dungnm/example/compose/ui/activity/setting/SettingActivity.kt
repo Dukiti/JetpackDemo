@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.dungnm.example.compose.R
-import com.dungnm.example.compose.ui.base.BaseActivity
+import com.dungnm.example.compose.base.BaseActivity
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 

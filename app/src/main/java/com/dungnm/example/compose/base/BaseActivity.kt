@@ -1,4 +1,4 @@
-package com.dungnm.example.compose.ui.base
+package com.dungnm.example.compose.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle

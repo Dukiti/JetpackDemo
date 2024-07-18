@@ -2,6 +2,7 @@ package com.dungnm.example.compose.di
 
 import android.content.Context
 import com.dungnm.example.compose.constants.DomainProperties
+import com.dungnm.example.compose.network.AppInterceptor
 import com.dungnm.example.compose.network.service.GithubService
 import dagger.Module
 import dagger.Provides

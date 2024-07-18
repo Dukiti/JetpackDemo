@@ -31,7 +31,7 @@ import com.dungnm.example.compose.ui.activity.CommonViewModel
 import com.dungnm.example.compose.ui.activity.gallery.GalleryActivity
 import com.dungnm.example.compose.ui.activity.login.LoginActivity
 import com.dungnm.example.compose.ui.activity.search.SearchActivity
-import com.dungnm.example.compose.ui.base.BaseScreen
+import com.dungnm.example.compose.base.BaseScreen
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 
 class HomeScreen : BaseScreen<CommonViewModel>() {

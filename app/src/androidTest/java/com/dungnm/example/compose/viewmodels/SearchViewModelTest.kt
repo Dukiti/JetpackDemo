@@ -1,26 +1,13 @@
 package com.dungnm.example.compose.viewmodels
 
-import android.content.Context
 import com.dungnm.example.compose.MainCoroutineRule
 import com.dungnm.example.compose.network.repo.IGithubRepo
-import com.dungnm.example.compose.network.repo.github.GithubRepo
-import com.dungnm.example.compose.network.repo.github.MockGithubRepo
-import com.dungnm.example.compose.network.service.GithubService
-import com.dungnm.example.compose.runBlockingTest
 import com.dungnm.example.compose.ui.activity.search.SearchViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import org.junit.After
 import org.junit.Assert
 import org.junit.Assert.assertEquals
@@ -98,9 +85,9 @@ class SearchViewModelTest {
         viewModel.onSearch("load_data")
         advanceUntilIdle()
         val currentPage = viewModel.pageIndex.value
-        viewModel.onNextPage().join()
-        viewModel.onNextPage().join()
-        viewModel.onPrePage().join()
+        viewModel.onNextPage()
+        viewModel.onNextPage()
+        viewModel.onPrePage()
         advanceUntilIdle()
         assertEquals(currentPage + 1, viewModel.pageIndex.value)
     }
@@ -116,8 +103,8 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun repoInitWorksAndDataIsHelloWorld() = runTest {
-        viewModel.getDefault().join()
+    fun testSynchronized() = runTest {
+        viewModel.getConfig()
         advanceUntilIdle()
         assertEquals(3, viewModel.resAll.value.size)
     }
