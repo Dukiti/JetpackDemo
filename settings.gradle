@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "JetPackDemo"
 include ':app'
+include ':core'
+include ':feature:login'
