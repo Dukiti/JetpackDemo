@@ -5,7 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.dungnm.example.compose.R
-import com.dungnm.example.compose.base.BaseActivity
+import com.dungnm.example.compose.core.base.BaseActivity
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 
 class GalleryActivity : BaseActivity() {

@@ -127,7 +127,9 @@ fun PhotoList(
                     model = item.path,
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth().wrapContentHeight()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
                 )
 
 //                Column(

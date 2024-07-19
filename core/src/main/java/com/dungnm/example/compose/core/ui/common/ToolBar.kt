@@ -33,9 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.dungnm.example.compose.base.BaseActivity
-import com.dungnm.example.compose.R
-import com.dungnm.example.compose.ui.activity.setting.SettingActivity
+import com.dungnm.example.compose.core.base.BaseActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +42,7 @@ fun ToolBar(
     modifier: Modifier = Modifier,
 ) {
     val crrContext = LocalContext.current
-    val titleRes = (crrContext as? BaseActivity)?.titleRes ?: R.string.app_name
+    val titleRes = (crrContext as? BaseActivity)?.titleRes ?: -1
     val defaultCLick: (() -> Unit) = {
         (crrContext as? Activity)?.finish()
     }
@@ -57,13 +55,13 @@ fun ToolBar(
             )
         }
     }, actions = {
-        IconButton(onClick = {
-            val intent = Intent(crrContext, SettingActivity::class.java)
-            crrContext.startActivity(intent)
-        }) {
-            Icon(
-                Icons.Rounded.Settings, contentDescription = null
-            )
-        }
+//        IconButton(onClick = {
+//            val intent = Intent(crrContext, SettingActivity::class.java)
+//            crrContext.startActivity(intent)
+//        }) {
+//            Icon(
+//                Icons.Rounded.Settings, contentDescription = null
+//            )
+//        }
     })
 }

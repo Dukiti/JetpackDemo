@@ -8,7 +8,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.dungnm.example.compose.constants.Tags
+import androidx.navigation.compose.rememberNavController
+import com.dungnm.example.compose.core.constants.Tags
+import com.dungnm.example.compose.core.navigation.AppNavGraph
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
@@ -65,8 +67,9 @@ fun MainAppTheme(
     CompositionLocalProvider(
         ExtendTheme provides customColorsPalette // our custom palette
     ) {
-        MaterialTheme(
-            colorScheme = colorScheme, typography = Typography, content = content
-        )
+        val navController = rememberNavController()
+        MaterialTheme(colorScheme = colorScheme, typography = Typography) {
+            AppNavGraph(navController = navController)
+        }
     }
 }

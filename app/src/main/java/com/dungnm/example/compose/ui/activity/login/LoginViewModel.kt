@@ -1,8 +1,8 @@
 package com.dungnm.example.compose.ui.activity.login
 
 import androidx.lifecycle.MutableLiveData
+import com.dungnm.example.compose.core.base.BaseViewModel
 import com.dungnm.example.compose.network.repo.ILoginRepo
-import com.dungnm.example.compose.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import javax.inject.Inject

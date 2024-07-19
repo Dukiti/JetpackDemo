@@ -1,6 +1,6 @@
 package com.dungnm.example.compose.ui.activity
 
-import com.dungnm.example.compose.base.BaseViewModel
+import com.dungnm.example.compose.core.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -33,8 +33,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.dungnm.example.compose.base.BaseActivity
 import com.dungnm.example.compose.R
+import com.dungnm.example.compose.core.base.BaseActivity
 import com.dungnm.example.compose.ui.activity.setting.SettingActivity
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -3,10 +3,10 @@ package com.dungnm.example.compose.ui.activity.gallery
 import android.content.Context
 import androidx.annotation.MainThread
 import androidx.lifecycle.viewModelScope
+import com.dungnm.example.compose.core.base.BaseViewModel
 import com.dungnm.example.compose.model.ImageGallery
 import com.dungnm.example.compose.model.PlaceholderState
 import com.dungnm.example.compose.network.repo.GalleryRepo
-import com.dungnm.example.compose.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,10 +1,10 @@
 package com.dungnm.example.compose.ui.activity.search
 
 import android.util.Log
+import com.dungnm.example.compose.core.base.BaseViewModel
 import com.dungnm.example.compose.model.response.RepoEntity
 import com.dungnm.example.compose.model.response.SearchResponse
 import com.dungnm.example.compose.network.repo.IGithubRepo
-import com.dungnm.example.compose.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

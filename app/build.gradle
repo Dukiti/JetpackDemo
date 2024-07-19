@@ -107,6 +107,8 @@ dependencies {
     kapt(libs.androidx.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
+    implementation project(':core')
+
     // Test
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
@@ -120,4 +122,5 @@ dependencies {
     androidTestImplementation libs.hilt.android.testing
     kaptAndroidTest libs.hilt.android.compiler
     androidTestAnnotationProcessor libs.hilt.android.compiler
+
 }
