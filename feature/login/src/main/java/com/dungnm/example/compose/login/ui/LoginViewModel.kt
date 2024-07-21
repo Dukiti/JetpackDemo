@@ -11,7 +11,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor() : BaseViewModel() {
 
     @Inject
-    private lateinit var loginRepo: ILoginRepo
+    internal lateinit var loginRepo: ILoginRepo
 
     private val _loginResLiveData: MutableLiveData<Boolean> = MutableLiveData()
     val loginResLiveData: MutableLiveData<Boolean> = _loginResLiveData

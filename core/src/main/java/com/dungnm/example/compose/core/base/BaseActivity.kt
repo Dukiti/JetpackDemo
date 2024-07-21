@@ -33,9 +33,7 @@ abstract class BaseActivity : ComponentActivity() {
     fun ComponentActivity.setContentView(content: @Composable () -> Unit) {
         setContent {
             val currentTheme by viewModel.currentTheme.collectAsState()
-            MainAppTheme(currentTheme = currentTheme) {
-                content.invoke()
-            }
+            MainAppTheme(currentTheme = currentTheme, content)
         }
     }
 }

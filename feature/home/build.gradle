@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.dungnm.example.compose.login'
+    namespace 'com.dungnm.example.compose.home'
     compileSdk 34
 
     defaultConfig {
@@ -54,6 +54,11 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation libs.androidx.material3
     implementation libs.androidx.material.icons.extended
+    implementation(libs.coil.compose)
+
+    // retrofit
+    implementation(libs.retrofit.sit)
+    implementation(libs.retrofit.gson.sit)
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit

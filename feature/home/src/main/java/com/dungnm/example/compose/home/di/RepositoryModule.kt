@@ -1,8 +1,8 @@
-package com.dungnm.example.compose.di
+package com.dungnm.example.compose.home.di
 
-import com.dungnm.example.compose.network.repo.IGithubRepo
-import com.dungnm.example.compose.network.repo.github.GithubRepo
-import com.dungnm.example.compose.network.service.GithubService
+import com.dungnm.example.compose.home.network.GithubService
+import com.dungnm.example.compose.home.repo.GithubRepo
+import com.dungnm.example.compose.home.repo.IGithubRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,11 +20,4 @@ object RepositoryModule {
     ): IGithubRepo {
         return GithubRepo(githubService)
     }
-
-//    @Provides
-//    @IntoMap
-//    @IntKey(0)
-//    fun provideLoginRepo(): ILoginRepo {
-//        return LoginRepo()
-//    }
 }

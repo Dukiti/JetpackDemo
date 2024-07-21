@@ -108,8 +108,13 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     implementation project(':core')
+    implementation project(':feature:login')
+    implementation project(':feature:home')
 
     // Test
+
+
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -117,7 +122,7 @@ dependencies {
     androidTestImplementation libs.androidx.ui.test.junit4
     debugImplementation libs.androidx.ui.tooling
     debugImplementation libs.androidx.ui.test.manifest
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
 
     androidTestImplementation libs.hilt.android.testing
     kaptAndroidTest libs.hilt.android.compiler

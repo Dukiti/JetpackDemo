@@ -1,0 +1,15 @@
+<resources>
+    <string name="label_gallery">Gallery</string>
+    <string name="label_login">Login</string>
+    <string name="label_search">Github Search</string>
+    <string name="label_search_des">Enter to search</string>
+    <string name="label_search_not_found">Not Found</string>
+    <string name="label_search_hint">Search</string>
+    <string name="label_owner_s">Owner: %s</string>
+    <string name="label_name_s">Name: %s</string>
+    <string name="label_description_s">Description: %s</string>
+    <string name="label_star_s">Star: %s</string>
+    <string name="label_language_s">Language: %s</string>
+    <string name="label_created_at_s">Created at: %s</string>
+    <string name="label_updated_at_s">Updated at: %s</string>
+</resources>

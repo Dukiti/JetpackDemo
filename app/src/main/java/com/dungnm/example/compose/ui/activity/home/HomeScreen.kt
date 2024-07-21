@@ -30,7 +30,6 @@ import com.dungnm.example.compose.R
 import com.dungnm.example.compose.core.base.BaseScreen
 import com.dungnm.example.compose.ui.activity.CommonViewModel
 import com.dungnm.example.compose.ui.activity.gallery.GalleryActivity
-import com.dungnm.example.compose.ui.activity.login.LoginActivity
 import com.dungnm.example.compose.ui.activity.search.SearchActivity
 import com.dungnm.example.compose.ui.theme.MainAppTheme
 
@@ -98,7 +97,7 @@ class HomeScreen : BaseScreen<CommonViewModel>() {
     }
 
     private fun openLoginForm(context: Context) {
-        context.startActivity(Intent(context, LoginActivity::class.java))
+//        context.startActivity(Intent(context, LoginActivity::class.java))
     }
 
     private fun openSearch(context: Context) {

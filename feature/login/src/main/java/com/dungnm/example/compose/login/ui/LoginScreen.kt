@@ -50,20 +50,25 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.dungnm.example.compose.core.base.BaseScreen
+import com.dungnm.example.compose.core.navigation.rememberMainNav
 import com.dungnm.example.compose.core.ui.theme.MainAppTheme
 
-class LoginScreen : BaseScreen<LoginViewModel>() {
+class LoginScreen: BaseScreen<LoginViewModel>() {
 
     @Composable
     override fun Screen(viewModel: LoginViewModel) {
         super.Screen(viewModel)
         val lifecycleOwner = LocalLifecycleOwner.current
         val context = LocalContext.current
+        val nav = rememberMainNav()
         viewModel.loginResLiveData.observe(lifecycleOwner) { loginSuccess ->
             loginSuccess?.let {
                 if (it) {
                     Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
+                    nav.navigate("home")
                 } else {
                     Toast.makeText(context, "Login Fail", Toast.LENGTH_SHORT)
                         .show()
@@ -253,13 +258,13 @@ class LoginScreen : BaseScreen<LoginViewModel>() {
     }
 
 
-    @Preview(showBackground = true, device = Devices.PIXEL_2, showSystemUi = true)
-    @Composable
-    fun LoginFormPreview() {
-        MainAppTheme {
-            val loginViewModel: LoginViewModel = hiltViewModel()
-            Screen(loginViewModel)
-        }
-    }
+//    @Preview(showBackground = true, device = Devices.PIXEL_2, showSystemUi = true)
+//    @Composable
+//    fun LoginFormPreview() {
+//        MainAppTheme {
+//            val loginViewModel: LoginViewModel = hiltViewModel()
+//            Screen(loginViewModel)
+//        }
+//    }
 
 }

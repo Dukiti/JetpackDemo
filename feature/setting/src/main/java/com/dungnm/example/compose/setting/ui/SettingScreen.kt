@@ -74,11 +74,11 @@ class SettingScreen : BaseScreen<SettingViewModel>() {
         }
     }
 
-    @Preview(showBackground = true, device = Devices.PIXEL_2)
-    @Composable
-    fun Preview() {
-        MainAppTheme {
-            Screen(hiltViewModel())
-        }
-    }
+//    @Preview(showBackground = true, device = Devices.PIXEL_2)
+//    @Composable
+//    fun Preview() {
+//        MainAppTheme {
+//            Screen(hiltViewModel())
+//        }
+//    }
 }

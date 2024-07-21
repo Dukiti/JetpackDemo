@@ -6,11 +6,20 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.dungnm.example.compose.core.constants.Tags
-import com.dungnm.example.compose.core.navigation.AppNavGraph
+import com.dungnm.example.compose.core.navigation.MainNav
+import com.dungnm.example.compose.core.navigation.NavEntryPoint
+import com.dungnm.example.compose.core.navigation.rememberMainNav
+import dagger.hilt.EntryPoints
+import dagger.hilt.android.EntryPointAccessors
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
@@ -50,7 +59,9 @@ val DarkCustomColorsPalette = CustomColorsPalette(
 
 @Composable
 fun MainAppTheme(
-    currentTheme: String = Tags.THEME_LIGHT, content: @Composable () -> Unit
+    currentTheme: String = Tags.THEME_LIGHT,
+    content: (@Composable () -> Unit)? = null,
+    builder: NavGraphBuilder.(NavHostController) -> Unit = {}
 ) {
     val colorScheme = when (currentTheme) {
         Tags.THEME_DARK -> DarkColorScheme
@@ -67,9 +78,11 @@ fun MainAppTheme(
     CompositionLocalProvider(
         ExtendTheme provides customColorsPalette // our custom palette
     ) {
-        val navController = rememberNavController()
         MaterialTheme(colorScheme = colorScheme, typography = Typography) {
-            AppNavGraph(navController = navController)
+            val navController = rememberMainNav()
+            NavHost(navController = navController, startDestination = "login", builder = {
+                builder(navController)
+            })
         }
     }
 }
