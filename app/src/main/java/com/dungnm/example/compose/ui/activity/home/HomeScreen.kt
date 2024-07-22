@@ -28,10 +28,9 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dungnm.example.compose.R
 import com.dungnm.example.compose.core.base.BaseScreen
+import com.dungnm.example.compose.core.ui.theme.MainAppTheme
 import com.dungnm.example.compose.ui.activity.CommonViewModel
 import com.dungnm.example.compose.ui.activity.gallery.GalleryActivity
-import com.dungnm.example.compose.ui.activity.search.SearchActivity
-import com.dungnm.example.compose.ui.theme.MainAppTheme
 
 class HomeScreen : BaseScreen<CommonViewModel>() {
 
@@ -101,14 +100,13 @@ class HomeScreen : BaseScreen<CommonViewModel>() {
     }
 
     private fun openSearch(context: Context) {
-        context.startActivity(Intent(context, SearchActivity::class.java))
     }
 
     @Preview(showBackground = true, device = Devices.PIXEL_2)
     @Composable
     fun Preview() {
-        MainAppTheme {
+        MainAppTheme(content = {
             Screen(hiltViewModel())
-        }
+        })
     }
 }

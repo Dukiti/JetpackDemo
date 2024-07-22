@@ -39,7 +39,6 @@ class SettingViewModel @Inject constructor(
 
     fun updateTheme(theme: String) {
         _themeSelected.value = theme
-        currentTheme.value = theme
         Storage.getInstance().putString(Tags.THEME, theme)
     }
 }

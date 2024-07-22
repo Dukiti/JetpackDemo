@@ -1,7 +1,7 @@
 package com.dungnm.example.compose
 
 import android.app.Application
-import com.dungnm.example.compose.utils.Storage
+import com.dungnm.example.compose.core.Storage
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp

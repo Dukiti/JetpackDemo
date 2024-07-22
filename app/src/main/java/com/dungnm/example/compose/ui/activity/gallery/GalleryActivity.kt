@@ -6,7 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.dungnm.example.compose.R
 import com.dungnm.example.compose.core.base.BaseActivity
-import com.dungnm.example.compose.ui.theme.MainAppTheme
+import com.dungnm.example.compose.core.ui.theme.MainAppTheme
 
 class GalleryActivity : BaseActivity() {
 
@@ -18,9 +18,9 @@ class GalleryActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainAppTheme {
+            MainAppTheme(content = {
                 GalleryScreen(viewModel)
-            }
+            })
         }
         viewModel.loadNextPage(this)
     }

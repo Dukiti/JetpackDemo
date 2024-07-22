@@ -20,13 +20,6 @@ import java.net.UnknownHostException
 abstract class BaseViewModel : ViewModel() {
     val isLoading = MutableLiveData(false)
     val errCode: MutableLiveData<Error> = MutableLiveData()
-    val currentTheme = MutableStateFlow(Tags.THEME_LIGHT)
-
-    init {
-        val theme =
-            Storage.getInstance().getString(Tags.THEME, Tags.THEME_LIGHT) ?: Tags.THEME_LIGHT
-        currentTheme.value = theme
-    }
 
     private val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         val error = parseException(throwable)
@@ -64,14 +57,6 @@ abstract class BaseViewModel : ViewModel() {
 
     open fun onError(error: Error) {
         errCode.postValue(error)
-    }
-
-    fun updateTheme() {
-        val theme =
-            Storage.getInstance().getString(Tags.THEME, Tags.THEME_LIGHT) ?: Tags.THEME_LIGHT
-        if (theme != currentTheme.value) {
-            currentTheme.value = theme
-        }
     }
 
     private fun parseException(exception: Throwable): Error {

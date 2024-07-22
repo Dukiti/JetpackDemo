@@ -1,6 +1,5 @@
 package com.dungnm.example.compose.login.ui
 
-import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -46,15 +45,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.dungnm.example.compose.core.base.BaseScreen
 import com.dungnm.example.compose.core.navigation.rememberMainNav
-import com.dungnm.example.compose.core.ui.theme.MainAppTheme
 
 class LoginScreen: BaseScreen<LoginViewModel>() {
 
@@ -104,7 +97,7 @@ class LoginScreen: BaseScreen<LoginViewModel>() {
                     value = credentials.pwd,
                     onChange = { data -> credentials = credentials.copy(pwd = data) },
                     submit = {
-                        onSubmit(viewModel, credentials, context)
+                        onSubmit(viewModel, credentials)
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -119,7 +112,7 @@ class LoginScreen: BaseScreen<LoginViewModel>() {
                 Spacer(modifier = Modifier.height(20.dp))
                 Button(
                     onClick = {
-                        onSubmit(viewModel, credentials, context)
+                        onSubmit(viewModel, credentials)
                     },
                     enabled = credentials.isNotEmpty(),
                     shape = RoundedCornerShape(5.dp),
@@ -133,13 +126,13 @@ class LoginScreen: BaseScreen<LoginViewModel>() {
     }
 
 
-    private fun onSubmit(viewModel: LoginViewModel, credentials: Credentials, context: Context) {
-        if (validData(credentials, context)) {
+    private fun onSubmit(viewModel: LoginViewModel, credentials: Credentials) {
+        if (validData(credentials)) {
             viewModel.login(credentials.login, credentials.pwd)
         }
     }
 
-    private fun validData(creds: Credentials, context: Context): Boolean {
+    private fun validData(creds: Credentials): Boolean {
         return creds.isNotEmpty()
     }
 

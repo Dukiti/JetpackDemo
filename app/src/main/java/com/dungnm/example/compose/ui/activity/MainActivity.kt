@@ -8,8 +8,9 @@ import com.dungnm.example.compose.R
 import com.dungnm.example.compose.core.base.BaseActivity
 import com.dungnm.example.compose.core.navigation.register
 import com.dungnm.example.compose.core.ui.theme.MainAppTheme
-import com.dungnm.example.compose.home.navigation.HomeFeatureApi
-import com.dungnm.example.compose.login.navigation.LoginFeatureApi
+import com.dungnm.example.compose.home.navigation.HomeRoute
+import com.dungnm.example.compose.login.navigation.LoginRoute
+import com.dungnm.example.compose.setting.nav.SettingRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,11 +23,10 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            MainAppTheme(builder = { navHostController ->
-                register(LoginFeatureApi())
-                register(HomeFeatureApi())
-            })
+        setContentView {
+            register(LoginRoute())
+            register(HomeRoute())
+            register(SettingRoute())
         }
     }
 }

@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.dungnm.example.compose.ui.common.ToolBar
+import com.dungnm.example.compose.core.ui.common.ToolBar
 
 abstract class BaseScreen<T : BaseViewModel> {
 

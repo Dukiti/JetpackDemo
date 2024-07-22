@@ -2,7 +2,7 @@ package com.dungnm.example.compose.core.navigation
 
 import android.os.Bundle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -10,11 +10,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
-import com.dungnm.example.compose.core.feature_api.FeatureApi
 import dagger.hilt.android.EntryPointAccessors
 
 fun NavGraphBuilder.register(
-    featureApi: FeatureApi,
+    featureApi: IRoute,
 ) {
     featureApi.registerGraph(navGraphBuilder = this,)
 }
@@ -37,7 +36,7 @@ fun rememberMainNav(
     vararg navigators: Navigator<out NavDestination>
 ): NavHostController {
     val context = LocalContext.current
-    return rememberSaveable {
+    return remember {
         EntryPointAccessors.fromApplication<NavEntryPoint>(context).mainNav()
     }
 }

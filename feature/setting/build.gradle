@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.dungnm.example.compose.login'
+    namespace 'com.dungnm.example.compose.setting'
     compileSdk 34
 
     defaultConfig {

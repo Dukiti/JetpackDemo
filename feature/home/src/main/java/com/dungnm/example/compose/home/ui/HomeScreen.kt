@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dungnm.example.compose.core.base.BaseScreen
+import com.dungnm.example.compose.core.navigation.rememberMainNav
 import com.dungnm.example.compose.home.model.BottomNavigationItem
 import com.dungnm.example.compose.home.ui.search.SearchScreen
 
@@ -35,11 +36,12 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
             mutableStateOf(0)
         }
         val navController = rememberNavController()
+        val mainNav = rememberMainNav()
         Scaffold(modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding), bottomBar = {
             NavigationBar {
-                BottomNavigationItem().bottomNavigationItems()
+                BottomNavigationItem .bottomNavigationItems()
                     .forEachIndexed { index, navigationItem ->
                         NavigationBarItem(selected = index == navigationSelectedItem, label = {
                             Text(navigationItem.label)
@@ -48,13 +50,17 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
                                 navigationItem.icon, contentDescription = navigationItem.label
                             )
                         }, onClick = {
-                            navigationSelectedItem = index
-                            navController.navigate(navigationItem.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
+                            if (navigationItem.route == "setting") {
+                                mainNav.navigate("setting")
+                            } else {
+                                navigationSelectedItem = index
+                                navController.navigate(navigationItem.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
                             }
                         })
                     }
@@ -62,17 +68,17 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
         }) { paddingValues ->
             NavHost(
                 navController = navController,
-                startDestination = "main",
+                startDestination = "home/main",
 //                modifier = Modifier.padding(paddingValues = paddingValues)
             ) {
-                composable("main") {
+                composable("home/main") {
                     SearchScreen().ContentView()
                 }
-                composable("search") {
+                composable("home/search") {
 //                    SearchScreen().ContentView()
                 }
-                composable("setting") {
-                    //call our composable screens here
+                composable("home/setting") {
+
                 }
             }
         }
@@ -82,8 +88,8 @@ class HomeScreen : BaseScreen<HomeViewModel>() {
 //    @Preview(showBackground = true, device = Devices.PIXEL_2)
 //    @Composable
 //    fun Preview() {
-//        MainAppTheme(content = {
+//        MaterialTheme {
 //            Screen(HomeViewModel())
-//        })
+//        }
 //    }
 }

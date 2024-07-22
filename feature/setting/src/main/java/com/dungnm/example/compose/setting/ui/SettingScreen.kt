@@ -15,15 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.dungnm.example.compose.core.base.BaseActivity
 import com.dungnm.example.compose.core.base.BaseScreen
 import com.dungnm.example.compose.core.constants.Tags
-import com.dungnm.example.compose.core.ui.theme.MainAppTheme
-import com.dungnm.example.compose.login.R
+import com.dungnm.example.compose.setting.R
 
 class SettingScreen : BaseScreen<SettingViewModel>() {
 
@@ -63,22 +60,20 @@ class SettingScreen : BaseScreen<SettingViewModel>() {
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(selected = themeSelected == Tags.THEME_LIGHT,
-                    onClick = { viewModel.updateTheme(Tags.THEME_LIGHT) })
+                    onClick = {
+                        viewModel.updateTheme(Tags.THEME_LIGHT)
+                        (context as? BaseActivity)?.updateTheme()
+                    })
                 Text(stringResource(id = R.string.label_light))
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(selected = themeSelected == Tags.THEME_DARK,
-                    onClick = { viewModel.updateTheme(Tags.THEME_DARK) })
+                    onClick = {
+                        viewModel.updateTheme(Tags.THEME_DARK)
+                        (context as? BaseActivity)?.updateTheme()
+                    })
                 Text(stringResource(id = R.string.label_dark))
             }
         }
     }
-
-//    @Preview(showBackground = true, device = Devices.PIXEL_2)
-//    @Composable
-//    fun Preview() {
-//        MainAppTheme {
-//            Screen(hiltViewModel())
-//        }
-//    }
 }

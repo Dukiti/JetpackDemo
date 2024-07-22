@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-package com.dungnm.example.compose.ui.common
+package com.dungnm.example.compose.core.ui.common
 
-import android.app.Activity
-import android.content.Intent
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ContactSupport
-import androidx.compose.material.icons.rounded.ArrowBackIosNew
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -34,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.dungnm.example.compose.core.base.BaseActivity
+import com.dungnm.example.compose.core.navigation.rememberMainNav
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,9 +38,10 @@ fun ToolBar(
     modifier: Modifier = Modifier,
 ) {
     val crrContext = LocalContext.current
+    val mainNav = rememberMainNav()
     val titleRes = (crrContext as? BaseActivity)?.titleRes ?: -1
     val defaultCLick: (() -> Unit) = {
-        (crrContext as? Activity)?.finish()
+        mainNav.popBackStack()
     }
     CenterAlignedTopAppBar(title = {
         Text(stringResource(id = titleRes))

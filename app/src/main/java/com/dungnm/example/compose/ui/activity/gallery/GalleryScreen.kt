@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.dungnm.example.compose.model.ImageGallery
 import com.dungnm.example.compose.model.PlaceholderState
-import com.dungnm.example.compose.ui.common.ToolBar
+import com.dungnm.example.compose.core.ui.common.ToolBar
 
 
 @Composable
