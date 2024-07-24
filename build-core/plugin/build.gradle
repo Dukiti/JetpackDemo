@@ -1,0 +1,21 @@
+plugins {
+    id 'java-gradle-plugin'
+}
+
+dependencies {
+//    implementation(libs.android.gradlePlugin)
+//    implementation(libs.kotlin.gradlePlugin)
+//    implementation(libs.ksp.gradlePlugin)
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'com.dungnm.demo.simple'
+            implementationClass = "com.example.dungnm.plugin.MainPlugin"
+        }
+    }
+}
+repositories {
+    mavenCentral()
+}
