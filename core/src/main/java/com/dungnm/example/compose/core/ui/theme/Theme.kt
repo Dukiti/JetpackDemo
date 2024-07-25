@@ -6,13 +6,15 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.dungnm.example.compose.core.constants.Tags
-import com.dungnm.example.compose.core.navigation.rememberMainNav
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80
@@ -39,6 +41,7 @@ data class CustomColorsPalette(
 )
 
 val ExtendTheme = staticCompositionLocalOf { CustomColorsPalette() }
+val LocalNavController = compositionLocalOf<NavController> { error("No found NavController") }
 
 val LightCustomColorsPalette = CustomColorsPalette(
     colorDescription = Color(color = 0xFF000000),
@@ -68,11 +71,13 @@ fun MainAppTheme(
         else -> LightCustomColorsPalette
     }
 
+    val navController = rememberNavController()
     CompositionLocalProvider(
-        ExtendTheme provides customColorsPalette // our custom palette
+        ExtendTheme provides customColorsPalette, // our custom palette,
+        LocalNavController provides navController
     ) {
         MaterialTheme(colorScheme = colorScheme, typography = Typography) {
-            val navController = rememberMainNav()
+//            val navController = rememberMainNav()
             NavHost(navController = navController, startDestination = "login", builder = {
                 builder(navController)
             })

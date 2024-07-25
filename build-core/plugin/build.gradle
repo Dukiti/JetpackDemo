@@ -1,11 +1,19 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'groovy'
+}
+
+repositories {
+    google()
+    mavenCentral()
 }
 
 dependencies {
-//    implementation(libs.android.gradlePlugin)
+    implementation(libs.android.gradlePlugin)
 //    implementation(libs.kotlin.gradlePlugin)
 //    implementation(libs.ksp.gradlePlugin)
+    implementation gradleApi()
+    implementation localGroovy()
 }
 
 gradlePlugin {
