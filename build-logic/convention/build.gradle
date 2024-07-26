@@ -18,9 +18,13 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        simplePlugin {
-            id = 'com.dungnm.demo.simple'
-            implementationClass = "com.example.dungnm.plugin.MainPlugin"
+        flavorConfig {
+            id = 'flavor-config'
+            implementationClass = "com.example.dungnm.convention.AppFlavorsConventionPlugin"
+        }
+        androidCompose {
+            id = 'android-compose'
+            implementationClass = "com.example.dungnm.convention.AndroidComposePlugin"
         }
     }
 }

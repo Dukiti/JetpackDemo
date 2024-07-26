@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("flavor-config")
 }
 
 android {
@@ -20,25 +21,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    flavorDimensions "default"
-    productFlavors {
-        register("dev")
-        register("sit")
-        register("uat")
-    }
-
-    sourceSets {
-        sit {
-            java.srcDir 'src/common/java'
-        }
-        uat {
-            java.srcDir 'src/common/java'
-        }
-        test {
-            java.srcDirs = ['src/test/java', 'src/main/java']
         }
     }
 
