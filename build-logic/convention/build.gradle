@@ -14,6 +14,13 @@ dependencies {
 //    implementation(libs.ksp.gradlePlugin)
     implementation gradleApi()
     implementation localGroovy()
+    implementation('com.squareup:javapoet:1.13.0')
+//    implementation('org.yaml:snakeyaml:2.2')
+    implementation 'com.google.code.gson:gson:2.7'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.4'
+
+
 }
 
 gradlePlugin {
@@ -25,6 +32,10 @@ gradlePlugin {
         androidCompose {
             id = 'android-compose'
             implementationClass = "com.example.dungnm.convention.AndroidComposePlugin"
+        }
+        networkConfig {
+            id = 'network-config'
+            implementationClass = "com.example.dungnm.convention.NetworkConfigPlugin"
         }
     }
 }

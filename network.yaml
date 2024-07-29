@@ -1,0 +1,37 @@
+networks:
+  - dev:
+      debugMode: true
+      timeOutInMiniSecond: 3000
+      maxRequestPerHost: 7
+      baseUrl: https://www.google.com/
+      retryOnConnectFail: false
+      netWorkCodeSuccess:
+        - 00
+      useMockData: false
+  - sit:
+      debugMode: false
+      timeOutInMiniSecond: 3000
+      maxRequestPerHost: 7
+      baseUrl: https://api.github.com/
+      retryOnConnectFail: false
+      netWorkCodeSuccess:
+        - 00
+      useMockData: false
+  - uat:
+      debugMode: false
+      timeOutInMiniSecond: 3000
+      maxRequestPerHost: 7
+      baseUrl: https://api.github.com/
+      retryOnConnectFail: false
+      netWorkCodeSuccess:
+        - 00
+      useMockData: false
+  - prod:
+      debugMode: false
+      timeOutInMiniSecond: 3000
+      maxRequestPerHost: 7
+      baseUrl: https://api.github.com/
+      retryOnConnectFail: false
+      netWorkCodeSuccess:
+        - 00
+      useMockData: false
