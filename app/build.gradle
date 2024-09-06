@@ -29,11 +29,33 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("..\\NoSignKey.jks")
+            storePassword "NoSignKey"
+            keyAlias "NoSignKey"
+            keyPassword "NoSignKey"
+        }
+    }
+
     buildTypes {
         release {
             debuggable false
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            File proguardDir = file("..\\proguard")
+            File defaultProguardFile = getDefaultProguardFile("proguard-android-optimize.txt")
+            List<File> list = new ArrayList<File>()
+            list.add(defaultProguardFile)
+            for (File i : proguardDir.listFiles()) {
+                if (i.isFile() && i.getName().endsWith(".pro")) {
+                    list.add(i)
+                }
+            }
+            println("2139810791" + list)
+            setProguardFiles(list)
+
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),'proguard-rules.pro',  '..\\proguard\\remove-log-rule.pro'
+            signingConfig signingConfigs.release
         }
     }
 
